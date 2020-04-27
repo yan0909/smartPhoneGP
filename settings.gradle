@@ -1,0 +1,2 @@
+rootProject.name='AndGameProg01'
+include ':app'
