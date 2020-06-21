@@ -1,7 +1,6 @@
 package kr.ac.kpu.game.andgp.kse.RhythmGame.game.scene;
 
 import android.media.MediaPlayer;
-import android.util.Log;
 
 import java.util.Random;
 
@@ -82,12 +81,11 @@ public class MainScene extends GameScene {
         // 코러스맨 버튼
         Button button = new Button(cx, y, R.mipmap.btn_start_chorus, R.mipmap.white_round_btn, R.mipmap.red_round_btn);
         button.setOnClickRunnable(false, new Runnable() {
-
             @Override
             public void run() {
                 SoundEffects se = SoundEffects.get();
                 se.play(R.raw.button);
-                Chorus_intro scene = new Chorus_intro();
+                Chorus_intro1 scene = new Chorus_intro1();
                 scene.push();
                 mp.pause();
             }
@@ -99,6 +97,16 @@ public class MainScene extends GameScene {
         // 로봇 버튼
         Button button2 = new Button(cx, y, R.mipmap.btn_start_robot, R.mipmap.white_round_btn, R.mipmap.red_round_btn);
         // 로봇 인트로 넣기
+        button2.setOnClickRunnable(false, new Runnable() {
+            @Override
+            public void run() {
+                SoundEffects se = SoundEffects.get();
+                se.play(R.raw.button);
+                Robot_intro1 scene = new Robot_intro1();
+                scene.push();
+                mp.pause();
+            }
+        });
         gameWorld.add(Layer.ui.ordinal(), button2);
 
         //----------------------------------------------------------------------------------

@@ -9,9 +9,8 @@ import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.UiBridge;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.obj.BitmapObject;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.obj.ui.Button;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.res.sound.SoundEffects;
-import kr.ac.kpu.game.andgp.kse.RhythmGame.ui.activity.GameActivity;
 
-public class Chorus_intro extends GameScene {
+public class Robot_intro1 extends GameScene {
     private GameTimer timer;
 
     public enum Layer {
@@ -20,7 +19,7 @@ public class Chorus_intro extends GameScene {
 
     @Override
     protected int getLayerCount() {
-        return Chorus_intro.Layer.COUNT.ordinal();
+        return Layer.COUNT.ordinal();
     }
 
     public void enter() {
@@ -46,7 +45,7 @@ public class Chorus_intro extends GameScene {
                 SoundEffects se = SoundEffects.get();
                 se.play(R.raw.button_start);
                 pop();
-                Chorus_intro2 scene = new Chorus_intro2();
+                Robot_intro2 scene = new Robot_intro2();
                 scene.push();
             }
         });
@@ -65,7 +64,7 @@ public class Chorus_intro extends GameScene {
         gameWorld.add(Layer.ui.ordinal(), button2);
 
         gameWorld.add(Layer.bg.ordinal(), new BitmapObject(UiBridge.metrics.size.x / 2, UiBridge.metrics.size.y / 2,
-                UiBridge.metrics.size.x, UiBridge.metrics.size.y, R.mipmap.chorus_intro1));
+                UiBridge.metrics.size.x, UiBridge.metrics.size.y, R.mipmap.robot_intro1));
 
     }
 }

@@ -11,8 +11,8 @@ import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.UiBridge;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.obj.BitmapObject;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.ui.activity.GameActivity;
 
-public class Chorus_intro2 extends GameScene {
-    private static final String TAG = Chorus_intro2.class.getSimpleName();;
+public class Robot_intro2 extends GameScene {
+    private static final String TAG = Robot_intro2.class.getSimpleName();;
     private int mdpi_100;
     private GameTimer timer;
     private MediaPlayer mp;
@@ -45,7 +45,7 @@ public class Chorus_intro2 extends GameScene {
         {
             // 사운드
             if(mp == null) {
-                mp = MediaPlayer.create(GameActivity.instance, R.raw.chorus_intro);
+                mp = MediaPlayer.create(GameActivity.instance, R.raw.robot_intro);
                 mp.setVolume(1.f, 1.f);
                 mp.setLooping(false);
                 mp.start();
@@ -56,7 +56,7 @@ public class Chorus_intro2 extends GameScene {
         {
             timer.reset();
             pop();
-            Chorus scene = new Chorus();
+            Robot scene = new Robot();
             scene.push();
         }
     }
@@ -67,6 +67,6 @@ public class Chorus_intro2 extends GameScene {
 
         // 백그라운드
         gameWorld.add(Layer.bg.ordinal(), new BitmapObject(UiBridge.metrics.size.x / 2, UiBridge.metrics.size.y / 2,
-                UiBridge.metrics.size.x, UiBridge.metrics.size.y, R.mipmap.chorus_intro2));
+                UiBridge.metrics.size.x, UiBridge.metrics.size.y, R.mipmap.robot_intro2));
     }
 }
