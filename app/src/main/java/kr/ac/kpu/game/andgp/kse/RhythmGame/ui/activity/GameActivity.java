@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.input.sensor.GyroSensor;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.GameScene;
+import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.MainWorld;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.UiBridge;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.res.sound.SoundEffects;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.view.GameView;
@@ -33,6 +34,7 @@ public class GameActivity extends AppCompatActivity {
 
         SoundEffects se = SoundEffects.get();
         se.loadAll(this);
+
 
         new MainScene().run();
     }

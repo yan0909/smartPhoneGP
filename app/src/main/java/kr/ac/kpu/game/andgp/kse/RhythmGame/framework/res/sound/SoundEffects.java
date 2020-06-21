@@ -26,7 +26,12 @@ public class SoundEffects {
             R.raw.chorus_together,
             R.raw.chorus_conductor,
             R.raw.button_start,
-            R.raw.button
+            R.raw.button,
+            R.raw.robot_charging_a,
+            R.raw.robot_charging_b,
+            R.raw.robot_charging_c,
+            R.raw.robot_intro
+
     };
 
     public static SoundEffects get() {
