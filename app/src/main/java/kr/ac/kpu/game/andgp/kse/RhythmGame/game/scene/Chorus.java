@@ -1,26 +1,15 @@
 package kr.ac.kpu.game.andgp.kse.RhythmGame.game.scene;
 
-import android.app.Activity;
-import android.media.AudioAttributes;
 import android.media.MediaPlayer;
-import android.os.PatternMatcher;
-import android.util.Log;
-import android.view.View;
 
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 
 import kr.ac.kpu.game.andgp.kse.RhythmGame.R;
-import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.iface.Touchable;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.GameScene;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.GameTimer;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.UiBridge;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.obj.BitmapObject;
-import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.obj.bg.ImageScrollBackground;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.obj.ui.Button;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.res.sound.SoundEffects;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.game.obj.ChorusMan;

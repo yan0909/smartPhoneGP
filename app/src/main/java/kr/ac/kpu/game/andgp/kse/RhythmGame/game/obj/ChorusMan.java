@@ -3,11 +3,9 @@ package kr.ac.kpu.game.andgp.kse.RhythmGame.game.obj;
 import android.util.Log;
 
 import kr.ac.kpu.game.andgp.kse.RhythmGame.R;
-import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.iface.Touchable;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.GameTimer;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.obj.AnimObject;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.res.bitmap.FrameAnimationBitmap;
-import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.res.sound.SoundEffects;
 
 public class ChorusMan extends AnimObject {
 

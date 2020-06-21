@@ -1,6 +1,5 @@
 package kr.ac.kpu.game.andgp.kse.RhythmGame.framework.res.bitmap;
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;

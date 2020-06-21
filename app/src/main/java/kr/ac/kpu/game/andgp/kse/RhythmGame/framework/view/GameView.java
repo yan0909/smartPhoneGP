@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.GameScene;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.GameTimer;
-import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.GameWorld;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.UiBridge;
 
 public class GameView extends View {

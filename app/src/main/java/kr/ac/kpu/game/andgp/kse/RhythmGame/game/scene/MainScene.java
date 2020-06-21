@@ -70,7 +70,7 @@ public class MainScene extends GameScene {
         gameWorld.add(Layer.bg.ordinal(), new BitmapObject(UiBridge.metrics.size.x / 2, UiBridge.metrics.size.y / 2, UiBridge.metrics.size.x, UiBridge.metrics.size.y, R.mipmap.title_bg));
 
         // 타이틀
-        gameWorld.add(Layer.ui.ordinal(), new BitmapObject(UiBridge.metrics.center.x, UiBridge.y(160), -150, -150, R.mipmap.rhythm_world_tile));
+        gameWorld.add(Layer.ui.ordinal(), new BitmapObject(UiBridge.metrics.center.x, UiBridge.y(160), -150, -150, R.mipmap.title));
         timer = new GameTimer(2, 1);
 
         int cx = UiBridge.metrics.center.x;
