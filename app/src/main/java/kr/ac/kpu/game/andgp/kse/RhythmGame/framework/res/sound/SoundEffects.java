@@ -16,6 +16,16 @@ public class SoundEffects {
     private HashMap<Integer, Integer> soundIdMap = new HashMap<>();
     private static final int[] SOUND_IDS = {
 //        R.raw.hadouken
+            R.raw.chorus_short_a,
+            R.raw.chorus_short_b,
+            R.raw.chorus_short_c,
+            R.raw.chorus_long_a,
+            R.raw.chorus_long_b,
+            R.raw.chorus_long_c,
+            R.raw.chorus_long_d,
+            R.raw.chorus_long_e,
+            R.raw.chorus_together,
+            R.raw.chorus_conductor,
     };
 
     public static SoundEffects get() {
@@ -33,10 +43,10 @@ public class SoundEffects {
                     .build();
             this.soundPool = new SoundPool.Builder()
                     .setAudioAttributes(audioAttributes)
-                    .setMaxStreams(3)
+                    .setMaxStreams(5)
                     .build();
         } else {
-            this.soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
+            this.soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
         }
     }
     public void loadAll(Context context) {
@@ -45,6 +55,7 @@ public class SoundEffects {
             soundIdMap.put(resId, soundId);
         }
     }
+
 
     public int play(int resId) {
         int soundId = soundIdMap.get(resId);

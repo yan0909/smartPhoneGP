@@ -48,6 +48,17 @@ public class BitmapObject extends GameObject{
         canvas.drawBitmap(sbmp.getBitmap(), null, dstRect, null);
     }
 
+    public void draw(Canvas canvas, int width, int height)
+    {
+        int halfWidth = width / 2;
+        int halfHeight = height / 2;
+        dstRect.left = x - halfWidth;
+        dstRect.top = y - halfHeight;
+        dstRect.right = x + halfWidth;
+        dstRect.bottom = y + halfHeight;
+        canvas.drawBitmap(sbmp.getBitmap(), null, dstRect, null);
+    }
+
     public void getBox(RectF rect) {
         int hw = width / 2;
         int hh = height / 2;

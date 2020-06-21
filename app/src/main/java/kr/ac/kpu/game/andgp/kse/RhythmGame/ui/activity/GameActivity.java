@@ -17,14 +17,20 @@ public class GameActivity extends AppCompatActivity {
 
     private static final long BACKKEY_INTERVAL_MSEC = 1000;
 
+    public static GameActivity instance = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         UiBridge.setActivity(this);
         super.onCreate(savedInstanceState);
         setContentView(new GameView(this));
 
-        new StartScene().run();
+        if(instance == null)
+        {
+            instance = this;
+        }
 
+        new StartScene().run();
     }
 
     private long lastBackPressedOn;

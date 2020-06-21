@@ -5,6 +5,7 @@ import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.iface.Touchable;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.GameTimer;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.obj.AnimObject;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.res.bitmap.FrameAnimationBitmap;
+import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.res.sound.SoundEffects;
 
 public class ChorusMan extends AnimObject {
 
@@ -21,7 +22,6 @@ public class ChorusMan extends AnimObject {
         super(x, y, 47 * 6, 82 * 6, R.mipmap.chorus_idle, 2, 2);
         timer = new GameTimer(60, 1);
 
-
         fabIdle = fab;
         fabShort = new FrameAnimationBitmap(R.mipmap.chorus_short, 12, 9);
         fabLong = new FrameAnimationBitmap(R.mipmap.chorus_long, 12, 24);
@@ -31,9 +31,12 @@ public class ChorusMan extends AnimObject {
     }
 
     public enum AnimState {
-        IDLE, SHORT, LONG, TOGETHER
+        NONE, IDLE, SHORT, LONG, TOGETHER
     }
     public void SetAnimState(AnimState state) {
+        if(state == AnimState.NONE)
+            return;
+
         myState = state;
         switch (state) {
             case IDLE:
