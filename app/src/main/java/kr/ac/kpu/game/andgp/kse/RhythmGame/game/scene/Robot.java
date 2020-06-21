@@ -16,6 +16,7 @@ import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.GameScene;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.MainWorld;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.GameTimer;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.UiBridge;
+import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.obj.BitmapObject;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.game.obj.Oiler;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.game.obj.RobotA;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.game.obj.RobotABody;
@@ -52,6 +53,7 @@ public class Robot extends GameScene {
     public static float planeHeight;
 
     private boolean m_bGameEnd;
+    private GameTimer timer;
 
 
     public Robot() {
@@ -59,6 +61,7 @@ public class Robot extends GameScene {
 
 
     public enum Layer {
+        bg,
         Robot,
         Oiler,
         UI,
@@ -71,29 +74,34 @@ public class Robot extends GameScene {
         super.enter();
         initObjects();
     }
+    @Override
+    public void exit() {
+        mediaPlayer.release();
+        super.exit();
+    }
 
     private final float m_arrRobotGenTime[] = {
             4.75f,
-            7.0f,
-            9.25f,
-            11.5f,
-            23.0625f,
-            25.1875f,
-            27.625f,
-            29.75f,
-            41.3125f,
-            43.4375f,
-            45.6875f,
-            48.0625f,
-            59.5625f,
-            62.125f,
-            64.375f,
-            66.625f,
-            66.625f,
-            78.25f,
-            80.4375f,
-            82.625f,
-            85.125f,
+            11.55f,
+            18.42f,
+            22.96f,
+            29.81f,
+            36.61f,
+            43.41f,
+            50.21f,
+            57.01f,
+            63.81f,
+            70.61f,
+            77.41f,
+            84.21f,
+//            62.125f,
+//            64.375f,
+//            66.625f,
+//            66.625f,
+//            78.25f,
+//            80.4375f,
+//            82.625f,
+//            85.125f,
     };
     private int m_iRobotGentimeIndex;
 
@@ -105,6 +113,7 @@ public class Robot extends GameScene {
         mediaPlayer = MediaPlayer.create(GameActivity.instance, R.raw.robot_bg);
         GameTimer.setStartTime();
 
+        timer = new GameTimer(1000, 1000);
 
         mediaPlayer.setLooping(false); // true:무한반복
         mediaPlayer.start();
@@ -124,6 +133,7 @@ public class Robot extends GameScene {
 //        oiler = Oiler.get(tempX, getTop() - 100);
         oiler = Oiler.get(200, 200);
         gameWorld.add(Layer.Oiler.ordinal(), oiler);
+        gameWorld.add(Layer.bg.ordinal(), new BitmapObject(UiBridge.metrics.size.x / 2, UiBridge.metrics.size.y / 2, UiBridge.metrics.size.x, UiBridge.metrics.size.y, R.mipmap.robot_bg));
 
 
         m_iRobotGentimeIndex = 0;
@@ -132,6 +142,7 @@ public class Robot extends GameScene {
         m_listRobotB = new ArrayList<>();
 
         m_bGameEnd = false;
+
     }
 
     @Override
@@ -197,6 +208,9 @@ public class Robot extends GameScene {
         GenerateRobot();
 
         DeleteRobot();
+
+        if(timer.getRawIndex() >= 92000)
+            pop();
     }
 
     @Override
