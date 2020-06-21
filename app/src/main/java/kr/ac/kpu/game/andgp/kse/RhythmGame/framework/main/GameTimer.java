@@ -5,6 +5,8 @@ public class GameTimer {
     private static final float NANOS_IN_ONE_SECOND_FLOAT = 1_000_000_000f;
     private static long currentTimeNanos;
     private static long diffNanos;
+    private static float m_fStartTime;
+    private static boolean m_bWriteStartTime = false;
 
     public static void setCurrentTimeNanos(long timeNanos) {
         diffNanos = timeNanos - currentTimeNanos;
@@ -13,12 +15,26 @@ public class GameTimer {
     public static long getCurrentTimeNanos() {
         return currentTimeNanos;
     }
+    public static long getCurrentTimeSeconds() {
+        return currentTimeNanos / NANOS_IN_ONE_SECOND;
+    }
     public static long getTimeDiffNanos() {
         return diffNanos;
     }
     public static float getTimeDiffSeconds() {
         return diffNanos / NANOS_IN_ONE_SECOND_FLOAT;
     }
+    public static float getStartTime() { return m_fStartTime; }
+    public static float getRealCurrentTimeSeconds() {
+        return (float)(currentTimeNanos / 1000000000.0) - m_fStartTime;
+    }
+    public static void setStartTime() {
+        if (m_bWriteStartTime == false)
+            m_bWriteStartTime = true;
+        m_fStartTime = getCurrentTimeSeconds();
+    }
+
+
 
     protected final int count;
     protected final int fps;
@@ -47,3 +63,4 @@ public class GameTimer {
         this.time = currentTimeNanos;
     }
 }
+

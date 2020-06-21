@@ -2,6 +2,7 @@ package kr.ac.kpu.game.andgp.kse.RhythmGame.framework.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Choreographer;
@@ -12,6 +13,8 @@ import androidx.annotation.Nullable;
 
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.GameScene;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.GameTimer;
+import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.GameWorld;
+import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.GameWorld2;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.UiBridge;
 
 public class GameView extends View {
@@ -20,6 +23,8 @@ public class GameView extends View {
     private GameTimer timer;
     private int frameCount;
 
+
+    private GameWorld2 gameWorld;
     public GameView(Context context) {
         super(context);
         init();
@@ -28,6 +33,9 @@ public class GameView extends View {
     private void init() {
         UiBridge.setView(this);
         timer = new GameTimer(FPS_SECONDS, 1);
+
+
+
         postFrameCallback();
     }
 

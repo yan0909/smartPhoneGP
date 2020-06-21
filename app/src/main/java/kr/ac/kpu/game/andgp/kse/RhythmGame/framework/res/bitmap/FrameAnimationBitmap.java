@@ -88,4 +88,9 @@ public class FrameAnimationBitmap {
         dstRect.bottom = y + yRadius;
         draw(canvas, dstRect, null);
     }
+
+    public void setHeight(int _iHeight)
+    {
+        sbmp.height = _iHeight;
+    }
 }
