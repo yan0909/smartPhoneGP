@@ -3,9 +3,11 @@ package kr.ac.kpu.game.andgp.kse.RhythmGame.game.scene;
 import android.app.Activity;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.os.PatternMatcher;
 import android.util.Log;
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -39,12 +41,24 @@ public class Chorus extends GameScene {
         int resId_Sound;
         ChorusMan.AnimState anim_A;
         ChorusMan.AnimState anim_B;
+        ChorusMan.AnimState anim_C;
+        boolean isChecked;
 
         public PatternData(int resId, ChorusMan.AnimState anim_a, ChorusMan.AnimState anim_b)
         {
             this.resId_Sound = resId;
             this.anim_A = anim_a;
             this.anim_B = anim_b;
+            this.isChecked = false;
+        }
+
+        public PatternData(ChorusMan.AnimState anim_c)
+        {
+            this.resId_Sound = 0;
+            this.anim_A = ChorusMan.AnimState.NONE;
+            this.anim_B = ChorusMan.AnimState.NONE;
+            this.anim_C = anim_c;
+            this.isChecked = false;
         }
     }
 
@@ -80,14 +94,29 @@ public class Chorus extends GameScene {
         //  사운드 패턴 재생
         int tick = timer.getRawIndex() - 300;
         for(Integer time : patternMap.keySet()) {
-            if(lastTick < time && time <= tick) {
-                PatternData data = patternMap.get(time);
-                soundEffects.play(data.resId_Sound);
+            PatternData data = patternMap.get(time);
+            boolean isPattern = data.resId_Sound != 0;
 
-                chorusMan[0].SetAnimState(data.anim_A);
-                chorusMan[1].SetAnimState(data.anim_B);
+            if(isPattern) {
+                if(lastTick < time && time <= tick) {
+                    soundEffects.play(data.resId_Sound);
+                    chorusMan[0].SetAnimState(data.anim_A);
+                    chorusMan[1].SetAnimState(data.anim_B);
+                }
+            }
+
+            // 히트 타임을 놓친 경우
+            if( !isPattern && !data.isChecked && time + 300 < tick )
+            {
+                if(chorusMan[0].GetAnimState() == ChorusMan.AnimState.IDLE)
+                    chorusMan[0].SetAnimState(ChorusMan.AnimState.WRONG);
+                if(chorusMan[1].GetAnimState() == ChorusMan.AnimState.IDLE)
+                    chorusMan[1].SetAnimState(ChorusMan.AnimState.WRONG);
+                data.isChecked = true;
             }
         }
+
+
 
         lastTick = tick;
     }
@@ -107,47 +136,61 @@ public class Chorus extends GameScene {
 
         patternMap.put(11655, new PatternData(R.raw.chorus_short_a, ChorusMan.AnimState.SHORT, ChorusMan.AnimState.NONE));
         patternMap.put(12635, new PatternData(R.raw.chorus_short_b, ChorusMan.AnimState.NONE, ChorusMan.AnimState.SHORT));
+        patternMap.put(13615, new PatternData(ChorusMan.AnimState.SHORT));
 
         patternMap.put(19405, new PatternData(R.raw.chorus_short_a, ChorusMan.AnimState.SHORT, ChorusMan.AnimState.NONE));
         patternMap.put(20385, new PatternData(R.raw.chorus_short_b, ChorusMan.AnimState.NONE, ChorusMan.AnimState.SHORT));
-
+        patternMap.put(21345, new PatternData(ChorusMan.AnimState.SHORT));
         patternMap.put(21665, new PatternData(R.raw.chorus_conductor, ChorusMan.AnimState.NONE, ChorusMan.AnimState.NONE));
         patternMap.put(22645, new PatternData(R.raw.chorus_together, ChorusMan.AnimState.TOGETHER, ChorusMan.AnimState.NONE));
         patternMap.put(22646, new PatternData(R.raw.chorus_together, ChorusMan.AnimState.NONE, ChorusMan.AnimState.TOGETHER));
+        patternMap.put(22647, new PatternData(ChorusMan.AnimState.TOGETHER));
 
         patternMap.put(27135, new PatternData(R.raw.chorus_short_a, ChorusMan.AnimState.SHORT, ChorusMan.AnimState.NONE));
         patternMap.put(28115, new PatternData(R.raw.chorus_short_b, ChorusMan.AnimState.NONE, ChorusMan.AnimState.SHORT));
+        patternMap.put(29147, new PatternData(ChorusMan.AnimState.SHORT));
 
         patternMap.put(34890, new PatternData(R.raw.chorus_short_a, ChorusMan.AnimState.SHORT, ChorusMan.AnimState.NONE));
         patternMap.put(35870, new PatternData(R.raw.chorus_short_b, ChorusMan.AnimState.NONE, ChorusMan.AnimState.SHORT));
+        patternMap.put(36850, new PatternData(ChorusMan.AnimState.SHORT));
 
         patternMap.put(38790, new PatternData(R.raw.chorus_long_a, ChorusMan.AnimState.LONG, ChorusMan.AnimState.NONE));
         patternMap.put(40690, new PatternData(R.raw.chorus_long_b, ChorusMan.AnimState.NONE, ChorusMan.AnimState.LONG));
+        patternMap.put(42690, new PatternData(ChorusMan.AnimState.LONG));
 
         patternMap.put(44890, new PatternData(R.raw.chorus_conductor, ChorusMan.AnimState.NONE, ChorusMan.AnimState.NONE));
         patternMap.put(45850, new PatternData(R.raw.chorus_together, ChorusMan.AnimState.TOGETHER, ChorusMan.AnimState.NONE));
         patternMap.put(45851, new PatternData(R.raw.chorus_together, ChorusMan.AnimState.NONE, ChorusMan.AnimState.TOGETHER));
+        patternMap.put(45852, new PatternData(ChorusMan.AnimState.TOGETHER));
+
         //
         patternMap.put(48763, new PatternData(R.raw.chorus_short_c, ChorusMan.AnimState.SHORT, ChorusMan.AnimState.NONE));
         patternMap.put(49423, new PatternData(R.raw.chorus_short_c, ChorusMan.AnimState.SHORT, ChorusMan.AnimState.NONE));
         patternMap.put(50755, new PatternData(R.raw.chorus_short_c, ChorusMan.AnimState.NONE, ChorusMan.AnimState.SHORT));
         patternMap.put(51425, new PatternData(R.raw.chorus_short_c, ChorusMan.AnimState.NONE, ChorusMan.AnimState.SHORT));
+        patternMap.put(52747, new PatternData(ChorusMan.AnimState.SHORT));
+        patternMap.put(53407, new PatternData(ChorusMan.AnimState.SHORT));
 
         patternMap.put(58013, new PatternData(R.raw.chorus_long_d, ChorusMan.AnimState.LONG, ChorusMan.AnimState.NONE));
         patternMap.put(58993, new PatternData(R.raw.chorus_long_e, ChorusMan.AnimState.NONE, ChorusMan.AnimState.LONG));
+        patternMap.put(59973, new PatternData(ChorusMan.AnimState.LONG));
 
         patternMap.put(65878, new PatternData(R.raw.chorus_long_d, ChorusMan.AnimState.LONG, ChorusMan.AnimState.NONE));
         patternMap.put(66858, new PatternData(R.raw.chorus_long_e, ChorusMan.AnimState.NONE, ChorusMan.AnimState.LONG));
+        patternMap.put(67838, new PatternData(ChorusMan.AnimState.LONG));
 
         patternMap.put(68298, new PatternData(R.raw.chorus_conductor, ChorusMan.AnimState.NONE, ChorusMan.AnimState.NONE));
         patternMap.put(69258, new PatternData(R.raw.chorus_together, ChorusMan.AnimState.TOGETHER, ChorusMan.AnimState.NONE));
         patternMap.put(69259, new PatternData(R.raw.chorus_together, ChorusMan.AnimState.NONE, ChorusMan.AnimState.TOGETHER));
+        patternMap.put(70239, new PatternData(ChorusMan.AnimState.TOGETHER));
 
         patternMap.put(73608, new PatternData(R.raw.chorus_long_d, ChorusMan.AnimState.LONG, ChorusMan.AnimState.NONE));
         patternMap.put(74588, new PatternData(R.raw.chorus_long_e, ChorusMan.AnimState.NONE, ChorusMan.AnimState.LONG));
+        patternMap.put(75568, new PatternData(ChorusMan.AnimState.LONG));
 
         patternMap.put(81300, new PatternData(R.raw.chorus_long_d, ChorusMan.AnimState.LONG, ChorusMan.AnimState.NONE));
         patternMap.put(82280, new PatternData(R.raw.chorus_long_e, ChorusMan.AnimState.NONE, ChorusMan.AnimState.LONG));
+        patternMap.put(83260, new PatternData(ChorusMan.AnimState.LONG));
 
 //        patternMap.put(87197, new PatternData(R.raw.chorus_conductor, ChorusMan.AnimState.NONE, ChorusMan.AnimState.NONE));
 //        patternMap.put(88157, new PatternData(R.raw.chorus_together, ChorusMan.AnimState.TOGETHER, ChorusMan.AnimState.NONE));
@@ -196,6 +239,7 @@ public class Chorus extends GameScene {
             public void run() {
                 chorusMan[2].SetAnimState(ChorusMan.AnimState.SHORT);
                 soundEffects.play(R.raw.chorus_short_c);
+                CheckHitTime(ChorusMan.AnimState.SHORT);
             }
         });
         btnLong.setOnClickRunnable(true, new Runnable() {
@@ -203,6 +247,7 @@ public class Chorus extends GameScene {
             public void run() {
                 chorusMan[2].SetAnimState(ChorusMan.AnimState.LONG);
                 soundEffects.play(R.raw.chorus_long_c);
+                CheckHitTime(ChorusMan.AnimState.LONG);
             }
         });
         btnTogether.setOnClickRunnable(true, new Runnable() {
@@ -210,6 +255,7 @@ public class Chorus extends GameScene {
             public void run() {
                 chorusMan[2].SetAnimState(ChorusMan.AnimState.TOGETHER);
                 soundEffects.play(R.raw.chorus_together);
+                CheckHitTime(ChorusMan.AnimState.TOGETHER);
             }
         });
 
@@ -230,4 +276,32 @@ public class Chorus extends GameScene {
         mp.start();
 
     }
+
+
+    private void CheckHitTime(ChorusMan.AnimState anim)
+    {
+        int tick = timer.getRawIndex() - 300;
+        boolean isOutOfHitTime = true;
+        for(Integer time : patternMap.keySet()) {
+            PatternData data = patternMap.get(time);
+            boolean isPattern = data.resId_Sound != 0;
+
+            // 히트 타임인 경우
+            if( !isPattern && time - 800 <= tick && tick <= time + 800  && data.anim_C == anim )
+            {
+                isOutOfHitTime = false;
+                data.isChecked = true;
+                break;
+            }
+        }
+
+        if( isOutOfHitTime ) {
+        if(chorusMan[0].GetAnimState() == ChorusMan.AnimState.IDLE)
+            chorusMan[0].SetAnimState(ChorusMan.AnimState.WRONG);
+        if(chorusMan[1].GetAnimState() == ChorusMan.AnimState.IDLE)
+            chorusMan[1].SetAnimState(ChorusMan.AnimState.WRONG);
+        }
+    }
+
+
 }

@@ -1,5 +1,7 @@
 package kr.ac.kpu.game.andgp.kse.RhythmGame.game.obj;
 
+import android.util.Log;
+
 import kr.ac.kpu.game.andgp.kse.RhythmGame.R;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.iface.Touchable;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.GameTimer;
@@ -14,24 +16,26 @@ public class ChorusMan extends AnimObject {
     private final FrameAnimationBitmap fabShort;
     private final FrameAnimationBitmap fabLong;
     private final FrameAnimationBitmap fabTogether;
+    private final FrameAnimationBitmap fabWrong;
 
     private GameTimer timer;
     private AnimState myState;
 
     public ChorusMan(float x, float y) {
         super(x, y, 47 * 6, 82 * 6, R.mipmap.chorus_idle, 2, 2);
-        timer = new GameTimer(60, 1);
+        timer = new GameTimer(1000, 1000);
 
         fabIdle = fab;
         fabShort = new FrameAnimationBitmap(R.mipmap.chorus_short, 12, 9);
         fabLong = new FrameAnimationBitmap(R.mipmap.chorus_long, 12, 24);
         fabTogether = new FrameAnimationBitmap(R.mipmap.chorus_together, 12, 9 );
+        fabWrong = new FrameAnimationBitmap(R.mipmap.chorus_wrong, 3, 3 );
 
         myState = AnimState.IDLE;
     }
 
     public enum AnimState {
-        NONE, IDLE, SHORT, LONG, TOGETHER
+        NONE, IDLE, SHORT, LONG, TOGETHER, WRONG
     }
     public void SetAnimState(AnimState state) {
         if(state == AnimState.NONE)
@@ -54,8 +58,18 @@ public class ChorusMan extends AnimObject {
             case TOGETHER:
                 fab = fabTogether;
                 break;
+
+            case WRONG:
+                fab = fabWrong;
+                break;
         }
         fab.reset();
+        timer.reset();
+    }
+
+    public AnimState GetAnimState()
+    {
+        return this.myState;
     }
 
     @Override
@@ -81,6 +95,12 @@ public class ChorusMan extends AnimObject {
         else if(myState == AnimState.TOGETHER)
         {
             if(fabTogether.done())
+                SetAnimState(AnimState.IDLE);
+        }
+        else if(myState == AnimState.WRONG)
+        {
+            Log.d(TAG, Integer.toString( timer.getRawIndex()));
+            if(timer.getRawIndex() > 1000)
                 SetAnimState(AnimState.IDLE);
         }
     }
