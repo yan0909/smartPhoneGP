@@ -212,13 +212,13 @@ public class Chorus extends GameScene {
             gameWorld.add(Layer.player.ordinal(), chorusMan[i]);
         gameWorld.add(Layer.player.ordinal(), chorusMan_conductor);
 
-        Button btnShort = new Button(mdpi_100 + 100, sh - mdpi_100 + 200,
-                R.mipmap.chorus_select_short);
-        Button btnLong = new Button(mdpi_100 + 100, sh - mdpi_100 + 350,
-                R.mipmap.chorus_select_long);
-        Button btnTogether = new Button(mdpi_100 + 100, sh - mdpi_100 + 500,
-                R.mipmap.chorus_select_together);
-
+//        Button btnShort = new Button(mdpi_100 + 100, sh - mdpi_100 + 200,
+//                R.mipmap.chorus_select_short);
+//        Button btnLong = new Button(mdpi_100 + 100, sh - mdpi_100 + 350,
+//                R.mipmap.chorus_select_long);
+//        Button btnTogether = new Button(mdpi_100 + 100, sh - mdpi_100 + 500,
+//                R.mipmap.chorus_select_together);
+        Button btnShort = new Button(mdpi_100 + 100, sh - mdpi_100 + 200, R.mipmap.btn_chorus_short, R.mipmap.white_round_btn, R.mipmap.red_round_btn);
         btnShort.setOnClickRunnable(true, new Runnable() {
             @Override
             public void run() {
@@ -227,6 +227,8 @@ public class Chorus extends GameScene {
                 CheckHitTime(ChorusMan.AnimState.SHORT);
             }
         });
+
+        Button btnLong = new Button(mdpi_100 + 100, sh - mdpi_100 + 350, R.mipmap.btn_chorus_long, R.mipmap.white_round_btn, R.mipmap.red_round_btn);
         btnLong.setOnClickRunnable(true, new Runnable() {
             @Override
             public void run() {
@@ -235,6 +237,7 @@ public class Chorus extends GameScene {
                 CheckHitTime(ChorusMan.AnimState.LONG);
             }
         });
+        Button btnTogether = new Button(mdpi_100 + 100, sh - mdpi_100 + 500, R.mipmap.btn_chorus_together, R.mipmap.white_round_btn, R.mipmap.red_round_btn);
         btnTogether.setOnClickRunnable(true, new Runnable() {
             @Override
             public void run() {
@@ -245,10 +248,11 @@ public class Chorus extends GameScene {
         });
 
         gameWorld.add(Layer.bg.ordinal(), new BitmapObject(UiBridge.metrics.size.x / 2, UiBridge.metrics.size.y / 2, UiBridge.metrics.size.x, UiBridge.metrics.size.y, R.mipmap.chorus_bg));
-        gameWorld.add(Layer.ui.ordinal(), new BitmapObject(mdpi_100 + 110, sh - mdpi_100 + 310, 400, 700, R.mipmap.chorus_select_bg));
+        gameWorld.add(Layer.ui.ordinal(), new BitmapObject(mdpi_100 + 110, sh - mdpi_100 + 310, 350, 650, R.mipmap.chorus_select_bg));
         gameWorld.add(Layer.ui.ordinal(), btnShort);
         gameWorld.add(Layer.ui.ordinal(), btnLong);
         gameWorld.add(Layer.ui.ordinal(), btnTogether);
+
 
         mp = MediaPlayer.create(GameActivity.instance, R.raw.chorus_bg);
         mp.setVolume(0.5f, 0.5f);
