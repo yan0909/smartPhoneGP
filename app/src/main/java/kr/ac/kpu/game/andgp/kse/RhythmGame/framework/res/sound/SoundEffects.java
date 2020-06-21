@@ -15,7 +15,6 @@ public class SoundEffects {
     private SoundPool soundPool;
     private HashMap<Integer, Integer> soundIdMap = new HashMap<>();
     private static final int[] SOUND_IDS = {
-//        R.raw.hadouken
             R.raw.chorus_short_a,
             R.raw.chorus_short_b,
             R.raw.chorus_short_c,
@@ -26,6 +25,8 @@ public class SoundEffects {
             R.raw.chorus_long_e,
             R.raw.chorus_together,
             R.raw.chorus_conductor,
+            R.raw.button_start,
+            R.raw.button
     };
 
     public static SoundEffects get() {

@@ -9,8 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.input.sensor.GyroSensor;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.GameScene;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.main.UiBridge;
+import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.res.sound.SoundEffects;
 import kr.ac.kpu.game.andgp.kse.RhythmGame.framework.view.GameView;
-import kr.ac.kpu.game.andgp.kse.RhythmGame.game.scene.StartScene;
+import kr.ac.kpu.game.andgp.kse.RhythmGame.game.scene.MainScene;
 
 
 public class GameActivity extends AppCompatActivity {
@@ -30,7 +31,10 @@ public class GameActivity extends AppCompatActivity {
             instance = this;
         }
 
-        new StartScene().run();
+        SoundEffects se = SoundEffects.get();
+        se.loadAll(this);
+
+        new MainScene().run();
     }
 
     private long lastBackPressedOn;

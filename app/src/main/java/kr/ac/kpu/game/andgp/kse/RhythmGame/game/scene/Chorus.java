@@ -92,7 +92,7 @@ public class Chorus extends GameScene {
 //        }
 
         //  사운드 패턴 재생
-        int tick = timer.getRawIndex() - 300;
+        int tick = timer.getRawIndex() - 200;
         for(Integer time : patternMap.keySet()) {
             PatternData data = patternMap.get(time);
             boolean isPattern = data.resId_Sound != 0;
@@ -117,6 +117,9 @@ public class Chorus extends GameScene {
         }
 
 
+        if(timer.getRawIndex() >= 92000)
+            pop();
+
 
         lastTick = tick;
     }
@@ -124,10 +127,8 @@ public class Chorus extends GameScene {
     @Override
     public void enter() {
         super.enter();
-//        GyroSensor.get();
 
         soundEffects = SoundEffects.get();
-        soundEffects.loadAll(GameActivity.instance);
 
 
         lastTick = 0;
@@ -201,10 +202,7 @@ public class Chorus extends GameScene {
 
     @Override
     public void exit() {
-//        GyroSensor.get().destroy();
-
         mp.release();
-
         super.exit();
     }
 
@@ -213,11 +211,9 @@ public class Chorus extends GameScene {
         timer = new GameTimer(1000, 1000);
         Random rand = new Random();
         mdpi_100 = UiBridge.x(300);
-//        Log.d(TAG, "mdpi_100: " + mdpi_100);
-        int sw = UiBridge.metrics.size.x;
+
         int sh = UiBridge.metrics.size.y;
-        int cx = UiBridge.metrics.center.x;
-        int cy = UiBridge.metrics.center.y;
+
         chorusMan = new ChorusMan[3];
         chorusMan[0] = new ChorusMan(mdpi_100 - 400, sh - mdpi_100 - 300);
         chorusMan[1] = new ChorusMan(mdpi_100 - 150, sh - mdpi_100 - 250);
@@ -264,11 +260,6 @@ public class Chorus extends GameScene {
         gameWorld.add(Layer.ui.ordinal(), btnShort);
         gameWorld.add(Layer.ui.ordinal(), btnLong);
         gameWorld.add(Layer.ui.ordinal(), btnTogether);
-
-//        gameWorld.add(Layer.bg.ordinal(), new ImageScrollBackground(R.mipmap.cookie_run_bg_1_2, ImageScrollBackground.Orientation.horizontal, -200));
-//        gameWorld.add(Layer.bg.ordinal(), new ImageScrollBackground(R.mipmap.cookie_run_bg_1_3, ImageScrollBackground.Orientation.horizontal, -300));
-
-        Log.d(TAG,"************************************");
 
         mp = MediaPlayer.create(GameActivity.instance, R.raw.chorus_bg);
         mp.setVolume(0.5f, 0.5f);
